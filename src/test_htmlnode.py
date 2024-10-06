@@ -101,6 +101,10 @@ class TestHTMLNode(unittest.TestCase):
             "<h2><b>Bold text</b>Normal text<i>italic text</i>Normal text</h2>",
         )
 
+    # def test_html_parent_without_children(self):
+    #     node = ParentNode("div", [])
+    #     self.assertEqual(node.to_html(), "ValueError: Invalid HTML: no children")
+
 
 if __name__ == "__main__":
     unittest.main()
