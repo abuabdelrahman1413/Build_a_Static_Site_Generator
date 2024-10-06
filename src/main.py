@@ -34,6 +34,7 @@ from htmlnode import LeafNode, ParentNode, HTMLNode
 #         print("Example 5 (Error case):")
 #         print(f"ValueError: {e}")
 
+
 def main():
     # Test case 1: Simple parent node with leaf children
     simple_parent = ParentNode(
@@ -41,7 +42,7 @@ def main():
         [
             LeafNode("p", "This is a paragraph"),
             LeafNode("span", "This is a span"),
-        ]
+        ],
     )
     print("Simple parent node:")
     print(simple_parent.to_html())
@@ -57,9 +58,9 @@ def main():
                 [
                     LeafNode("p", "Article paragraph 1"),
                     LeafNode("p", "Article paragraph 2"),
-                ]
+                ],
             ),
-        ]
+        ],
     )
     print("Nested parent nodes:")
     print(nested_parent.to_html())
@@ -69,7 +70,7 @@ def main():
     parent_with_props = ParentNode(
         "div",
         [LeafNode("p", "Paragraph with class")],
-        {"class": "container", "id": "main"}
+        {"class": "container", "id": "main"},
     )
     print("Parent node with properties:")
     print(parent_with_props.to_html())
@@ -90,6 +91,6 @@ def main():
     except ValueError as e:
         print(f"Correctly raised ValueError: {e}")
 
-    
+
 if __name__ == "__main__":
     main()
