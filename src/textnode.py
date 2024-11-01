@@ -1,35 +1,27 @@
-# Enum is used to define the different types of text nodes (e.g. TextNode, ElementNode, etc.)
 from enum import Enum
 
+
 class TextType(Enum):
-    """
-    Enum is used to define the different types of text nodes (e.g. TextNode, ElementNode, etc.)
-    """
-    Normal = "normal"
-    Bold = "bold"
-    Italic = "italic"
-    Code = "code"
-    Link = "link"
-    Image = "image"
+    TEXT = "text"
+    BOLD = "bold"
+    ITALIC = "italic"
+    CODE = "code"
+    LINK = "link"
+    IMAGE = "image"
+
 
 class TextNode:
-    """
-    TextNode is used to define the different types of text nodes (e.g. TextNode, ElementNode, etc.)
-    """
-    def __init__(self, text: str, textType: TextType, url: str = None):
+    def __init__(self, text, text_type, url=None):
         self.text = text
-        self.textType = textType.value
+        self.text_type = text_type.value
         self.url = url
 
     def __eq__(self, other):
-        """
-        Override the default Equals behavior
-        """
-        return self.text == other.text and self.textType == other.textType and self.url == other.url
-    
+        return (
+            self.text_type == other.text_type
+            and self.text == other.text
+            and self.url == other.url
+        )
+
     def __repr__(self):
-        """
-        Override the default representation
-        """
-        return f"TextNode({self.text}, {self.textType}, {self.url})"
-    
+        return f"TextNode({self.text}, {self.text_type}, {self.url})"
