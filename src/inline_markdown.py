@@ -4,6 +4,20 @@ import re  # Import the regular expressions module for pattern matching
 from textnode import TextNode, TextType
 
 
+def text_to_textnodes(text):
+    # Initialize 'nodes' list
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    # Process for images and update nodes list
+    nodes = split_nodes_image(nodes)
+    # Finally, process for links and update nodes list
+
+    nodes = split_nodes_link(nodes)
+    return nodes
+
+
 # Define a function to split nodes by a specified delimiter, applying specific text types
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []  # List to store the newly processed nodes
@@ -34,9 +48,9 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
 # Define a function to extract and separate image nodes from text
 def split_nodes_image(old_nodes):
-    new_nodes = []  # List to store nodes after processing
-    for old_node in old_nodes:  # Iterate over each old node
-        if old_node.text_type != TextType.TEXT.value:  # Process only text nodes
+    new_nodes = []  # ^ List to store nodes after processing
+    for old_node in old_nodes:  # ^ Iterate over each old node
+        if old_node.text_type != TextType.TEXT.value:  # ^ Process only text nodes
             new_nodes.append(old_node)
             continue
         original_text = old_node.text  # Store the text of the current node
@@ -63,7 +77,7 @@ def split_nodes_image(old_nodes):
             )
             # Set remaining text to process further
             original_text = sections[1]
-        # Append any remaining text as a regular text node
+        #! Append any remaining text as a regular text node
         if original_text != "":
             new_nodes.append(TextNode(original_text, TextType.TEXT))
     return new_nodes  # Return the list with split image nodes
